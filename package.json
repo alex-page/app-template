@@ -21,8 +21,12 @@
 		"test": "npm run test:content && npm run test:scripts",
 		"test:content": "write-good *.md",
 		"test:scripts": "xo scritps/",
-		"build": "eleventy",
-		"watch": "eleventy --serve",
+		"build:js": "node rollup",
+		"build:site": "eleventy",
+		"build": "npm run build:js && npm run build:site",
+		"watch:js": "onchange 'src/_includes/js/*.js' -- node scripts/rollup",
+		"watch:site": "eleventy --serve",
+		"watch": "npm run watch:js | npm run watch:site",
 		"deploy": "node scripts/deploy"
 	},
 	"engines": {
@@ -40,7 +44,10 @@
 	"dependencies": {
 		"@11ty/eleventy": "^0.10.0",
 		"clean-css": "^4.2.3",
-		"uglify-js": "^3.8.0",
+		"harmonograph": "^4.0.0",
+		"onchange": "^6.1.0",
+		"rollup": "^2.2.0",
+		"stringify-object": "^3.3.0",
 		"workbox-build": "^5.0.0"
 	},
 	"devDependencies": {

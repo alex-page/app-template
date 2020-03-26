@@ -60,7 +60,8 @@ a {
 
 a:focus,
 button:focus,
-button:hover {
+button:hover,
+#app a:hover {
 	outline: 2px solid var(--active-color);
 	outline-offset: 4px;
 }
@@ -86,10 +87,18 @@ main {
 }
 
 /* Application content */
-#app {
+#app a:hover {
+	text-decoration: none;
+}
+
+.app-container {
 	background: #555;
 	border-radius: 5px;
 	padding: 50px;
+}
+
+html:not(.js) #app {
+	display: none;
 }
 
 

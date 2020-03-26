@@ -1,6 +1,5 @@
 // Dependencies
 const minifyCss = require( 'clean-css' );
-const minifyJS = require( 'uglify-js' );
 const syntaxHighlight = require('@11ty/eleventy-plugin-syntaxhighlight');
 
 // Local dependencies
@@ -10,27 +9,12 @@ module.exports = ( eleventyConfig ) => {
 	/**
 	 * cssmin - Minify CSS filter
 	 */
-	eleventyConfig.addFilter( 'cssmin', ( code ) => {
+	eleventyConfig.addFilter( 'cssmin', code => {
 		const minified = new minifyCss({}).minify( code ).styles;
 		return minified;
 	});
 
-	/**
-	 * jsmin - Minify JS filter
-	 */
-	eleventyConfig.addFilter( 'jsmin', ( code ) => {
-		const minified = minifyJS.minify( code, {
-			mangle: true,
-			compress: true,
-		});
-
-		if( minified.error ) {
-			console.log( 'UglifyJS error: ', minified.error );
-			return code;
-		}
-
-		return minified.code;
-	});
+	eleventyConfig.setUseGitIgnore(false);
 
 	/**
 	 * Add syntax highlighting on the server side
@@ -46,9 +30,9 @@ module.exports = ( eleventyConfig ) => {
 	// Adjust default browserSync config
 	eleventyConfig.setBrowserSyncConfig({
 		callbacks: {
-			ready: function(error, browseSync) {
+			ready: function(error, browserSync) {
 
-				browseSync.addMiddleware('*', (req, res) => {
+				browserSync.addMiddleware('*', (req, res) => {
 					const content_404 = fs.readFileSync('_site/404.html');
 					// Provides the 404 content without redirect.
 					res.write(content_404);

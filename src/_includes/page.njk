@@ -7,6 +7,7 @@
 	<title>{{pkg.name}} - v{{pkg.version}}</title>
 	{% set css %}{% include 'css/style.css' %}{% endset %}
 	<style>{{ css | cssmin | safe }}</style>
+	<script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
 	<a class="skip-link sr-only" href="#content">Skip to content</a>
@@ -16,8 +17,13 @@
 
 	<!-- The main content area -->
 	<main id="content">
-		<div id="app">
-			{{ content | safe }}
+		<div class="app-container">
+			<div id="app">
+				{{ content | safe }}
+			</div>
+			<noscript>
+				The application requires JavaScript to work 💔.
+			</noscript>
 		</div>
 	</main>
 
@@ -29,8 +35,8 @@
 		<p class="aside-footer">{{pkg.name}} - v{{pkg.version}}</p>
 	</aside>
 
-	{% set js %}{% include 'js/script.js' %}{% endset %}
-	<script>{{ js | jsmin | safe }}</script>
-	{%block page_end %}{% endblock %}
+	<script>
+		{{ data.jsBundle | safe }}
+	</script>
 </body>
 </html>
