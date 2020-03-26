@@ -102,7 +102,15 @@ aside {
 
 aside form {
 	padding: 10px 20px;
+	overflow-y: auto;
 }
+
+@media (min-width: 800px){
+	aside {
+		height: 100vh;
+	}
+}
+
 
 /* App name */
 .aside-footer {
