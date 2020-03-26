@@ -19,7 +19,6 @@ This will create a local browser-sync instance live refreshing all the changes t
 2. Push to master and check that the action completed
 3. Configure GitHub pages to publish the `gh-pages` branch
 
-
 ## Changelog
 
 - v0.0.0 - Initial template

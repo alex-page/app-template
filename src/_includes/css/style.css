@@ -1,29 +1,184 @@
 :root {
-	--base-font: -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
-	--base-font-size: 1.4rem;
+	--base-font: "SFMono-Regular",Consolas,"Liberation Mono",Menlo,Courier,monospace;
+	--base-font-size: 1rem;
 
-	--border-color: #ccc;
+	--subdued-color: rgba(255,255,255,0.05);
+	--background-color: #1C1C1E;
+	--text-color: #fff;
+	--frame-background-color: #050505;
+	--active-color: #ffd900;
+	--link-color: #28a745;
+	--link-muted-color: #BBDBEE;
 }
 
 html {
-	font-size: 16px;
-	color: var( --text-color );
-
-	font-family: var( --base-font );
+	font-family: var(--base-font);
 	font-size: var(--base-font-size);
 	font-weight: 300;
 	line-height: 1.5;
+
+	background: var(--background-color);
+	color: var(--text-color);
+}
+
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0,0,0,0);
+	border: 0;
+}
+
+.sr-only:focus {
+	width: auto;
+	height: auto;
+	clip: auto;
+	overflow: visible;
 }
 
 body {
-	margin: 0 auto;
-	max-width: 600px;
-}
-
-blockquote {
 	margin: 0;
-	font-size: 1.2rem;
-	padding-left: 1rem;
-	border-left: 2px solid var(--border-color);
+	display: grid;
+	height: 100vh;
+	grid-template-rows: 80px 1fr 35vh;
 }
 
+@media (min-width: 800px){
+	body {
+		grid-template-rows: none;
+		grid-template-columns: 80px 1fr 350px;
+	}
+}
+
+
+a {
+	color: var(--link-color);
+}
+
+a:focus,
+button:focus,
+button:hover {
+	outline: 2px solid var(--active-color);
+	outline-offset: 4px;
+}
+
+
+.skip-link {
+	padding: .5rem 1rem;
+	position: absolute;
+	top: 20px;
+	left: 20px;
+	z-index: 100;
+	background: var(--frame-background-color);
+	color: var(--link-color);
+	border-radius: 5px;
+}
+
+/* Main content style */
+main {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 20px;
+}
+
+/* Application content */
+#app {
+	background: #555;
+	border-radius: 5px;
+	padding: 50px;
+}
+
+
+/* Sidebar style */
+aside {
+	display: grid;
+	grid-template-rows: 1fr 50px;
+	background: var(--frame-background-color);
+}
+
+aside form {
+	padding: 10px 20px;
+}
+
+/* App name */
+.aside-footer {
+	margin: 0;
+	padding: 10px 20px;
+	font-weight: 100;
+	border-top: 1px solid var(--subdued-color);
+}
+
+/* Form styles */
+button {
+	background-color: var(--link-color);
+	color: #fff;
+	border: 0;
+	font-size: 1.2rem;
+	padding: 15px 40px;
+	border-radius: 5px;
+	cursor: pointer;
+	font-family: var(--base-font);
+	transition: background-color 0.15s ease-in-out;
+}
+
+/* Nav style */
+nav {
+	background: var(--frame-background-color);
+}
+
+nav ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+
+	display:grid;
+
+	grid-auto-flow: column;
+	grid-auto-columns: 80px;
+	grid-auto-rows: 80px;
+
+	width: 100%;
+}
+
+nav ul li {
+	border-right: 1px solid var(--subdued-color);
+}
+
+@media (min-width: 800px){
+	nav ul {
+		grid-auto-flow: row;
+	}
+
+	nav ul li {
+		border-bottom: 1px solid var(--subdued-color);
+	}
+}
+
+nav ul a {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-decoration: none;
+}
+
+nav ul a:hover,
+nav ul a:focus {
+	box-shadow: inset -4px 0 0 0 var(--active-color);
+	background-color: var(--subdued-color);
+}
+
+
+/* Icon style */
+.icon {
+	fill: var(--text-color);
+	width: 30px;
+	height: 30px;
+	font-size: 30px;
+	line-height: 1;
+}

@@ -1,12 +1,14 @@
 {
 	"name": "app-template",
+	"emoji": "🧪",
 	"version": "0.0.0",
 	"private": "true",
 	"description": "🧪 Minimal static application template with deployment to GitHub pages",
 	"author": {
 		"name": "Alex Page",
 		"email": "alex@alexpage.com.au",
-		"url": "http://alexpage.com.au/"
+		"url": "http://alexpage.com.au/",
+		"twitter": "https://twitter.com/aalexpaage/"
 	},
 	"contributors": [
 		{
