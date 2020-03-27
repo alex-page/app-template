@@ -1,7 +1,8 @@
 // Dependencies
 const minifyCss = require( 'clean-css' );
 const syntaxHighlight = require('@11ty/eleventy-plugin-syntaxhighlight');
-const rollup = require('rollup');
+const {exec} = require('child_process');
+
 
 // Local dependencies
 const fs = require('fs');
@@ -16,19 +17,15 @@ module.exports = ( eleventyConfig ) => {
 	});
 
 	eleventyConfig.addNunjucksAsyncShortcode("jsBundle", async() => {
-		const bundle = await rollup.rollup({
-			input: 'src/_includes/js/script.js'
-		});
-	
-		const {output} = await bundle.generate({
-			format: 'iife',
-			globals: {
-				harmonograph: 'hrmngrph'
-			},
-			compact: true
-		});
+		return new Promise((resolve, reject) => {
+			exec('npx rollup -c',(error, stdout, stderr) => {
+				if(error){
+					reject(error);
+				}
 
-		return output[0].code;
+				resolve(stdout);
+			});
+		});
 	})
 
 	/**
