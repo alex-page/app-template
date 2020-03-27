@@ -20,5 +20,3 @@ noScriptMessage: The application requires JavaScript to work 💔.
 # Hello world
 
 Pretty dang coooool 🧙‍♂️
-
-{{pkg.homepage | dump | safe}}
