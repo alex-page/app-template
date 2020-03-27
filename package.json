@@ -21,7 +21,7 @@
 		"test": "npm run test:content && npm run test:scripts",
 		"test:content": "write-good *.md",
 		"test:scripts": "xo scritps/",
-		"build:js": "node rollup",
+		"build:js": "node scripts/rollup",
 		"build:site": "eleventy",
 		"build": "npm run build:js && npm run build:site",
 		"watch:js": "onchange 'src/_includes/js/*.js' -- node scripts/rollup",
