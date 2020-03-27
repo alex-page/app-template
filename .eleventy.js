@@ -1,6 +1,7 @@
 // Dependencies
 const minifyCss = require( 'clean-css' );
 const syntaxHighlight = require('@11ty/eleventy-plugin-syntaxhighlight');
+const rollup = require('rollup');
 
 // Local dependencies
 const fs = require('fs');
@@ -15,6 +16,22 @@ module.exports = ( eleventyConfig ) => {
 	});
 
 	eleventyConfig.setUseGitIgnore(false);
+
+	eleventyConfig.addNunjucksAsyncShortcode("jsBundle", async() => {
+		const bundle = await rollup.rollup({
+			input: 'src/_includes/js/script.js'
+		});
+	
+		const {output} = await bundle.generate({
+			format: 'iife',
+			globals: {
+				harmonograph: 'hrmngrph'
+			},
+			compact: true
+		});
+
+		return output[0].code;
+	})
 
 	/**
 	 * Add syntax highlighting on the server side

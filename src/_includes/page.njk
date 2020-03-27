@@ -19,6 +19,7 @@
 	<main id="content">
 		<div class="app-container">
 			<div id="app">
+
 				{{ content | safe }}
 			</div>
 			<noscript>
@@ -36,7 +37,7 @@
 	</aside>
 
 	<script>
-		{{ data.jsBundle | safe }}
+		{% jsBundle %}
 	</script>
 </body>
 </html>
