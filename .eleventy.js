@@ -15,8 +15,6 @@ module.exports = ( eleventyConfig ) => {
 		return minified;
 	});
 
-	eleventyConfig.setUseGitIgnore(false);
-
 	eleventyConfig.addNunjucksAsyncShortcode("jsBundle", async() => {
 		const bundle = await rollup.rollup({
 			input: 'src/_includes/js/script.js'
